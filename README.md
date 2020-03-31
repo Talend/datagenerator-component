@@ -1,8 +1,11 @@
 # Data Generator
 <div align="center">
-![component build](https://github.com/tgourdel/datagenerator-component/workflows/TCK%20component%20build/badge.svg)
 
-[📦 Download latest CAR archive](https://github.com/tgourdel/datagenerator-component/releases/latest/download/datagenerator-component.car)
+   <a href="https://github.com/tgourdel/datagenerator-component/actions">
+       <img src="https://github.com/tgourdel/datagenerator-component/workflows/TCK%20component%20build/badge.svg"/>
+   </a>
+
+📦 [Download latest CAR archive](https://github.com/tgourdel/datagenerator-component/releases/latest/download/datagenerator-component.car)
 </div>
 
 ## Description
