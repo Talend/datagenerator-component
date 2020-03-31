@@ -1,5 +1,9 @@
 # Data Generator
+<div align="center">
 ![component build](https://github.com/tgourdel/datagenerator-component/workflows/TCK%20component%20build/badge.svg)
+
+[📦 Download latest CAR archive](https://github.com/tgourdel/datagenerator-component/releases/latest/download/datagenerator-component.car)
+</div>
 
 ## Description
 
@@ -24,7 +28,7 @@ docker run -v $re4p_path:/opt/talend/pipeline-remote-engine/ -v /opt/talend/down
 
 This component is based on the popular [java-faker](https://github.com/DiUS/java-faker) library.
 
-## ToDo
+## 📝 ToDo
 
  - Implement all the functions from the library.
  - Allow pseudo streaming
