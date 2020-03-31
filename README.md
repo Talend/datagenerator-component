@@ -24,7 +24,7 @@ docker run -v $re4p_path:/opt/talend/pipeline-remote-engine/ -v /opt/talend/down
 
 This component is based on the popular [java-faker](https://github.com/DiUS/java-faker) library.
 
-## Coming soon
+## ToDo
 
  - Implement all the functions from the library.
  - Allow pseudo streaming

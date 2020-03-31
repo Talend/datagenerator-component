@@ -12,7 +12,7 @@
   <packaging>jar</packaging>
 
   <name>A Component Family</name>
-  <description>A generated component project</description>
+  <description>Data Generator project</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
