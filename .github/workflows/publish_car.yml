@@ -1,0 +1,35 @@
+name: TCK component build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Build
+      id: build
+      run: |
+        chmod +x ./mvnw
+        ./mvnw clean install
+        mvn talend-component:car
+        echo "::set-output name=pom_version::$(mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.version -q -DforceStdout)"
+
+    - name: Delete
+      uses: ame-yu/action-delete-latest-release@v2
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+         tag_name: ${{ steps.build.outputs.pom_version }}
+         files: ./target/datagenerator-component-${{ steps.build.outputs.pom_version }}.car
+      env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

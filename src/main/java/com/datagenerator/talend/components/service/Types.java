@@ -1,0 +1,43 @@
+package com.datagenerator.talend.components.service;
+
+public enum Types{
+    // Personal
+    FULLNAME,
+    FIRSTNAME,
+    LASTNAME,
+    MIDDLENAME,
+    AGE,
+    EMAIL,
+    USERNAME,
+    PASSWORD,
+    SEX,
+    DATEOFBIRTH,
+    TELEPHONENUMBER,
+    NATIONALITY,
+    NATIONALITYCODE,
+    CITY,
+    POSTALCODE,
+    STREETADDRESS,
+    STREETNUMBER,
+    APPARTNUMBER,
+    CARDNUMBER,
+    EXPIRYDATE,
+    VENDOR,
+    PASSPORTNUMBER,
+    COMPANYDOMAIN,
+    COMPANYNAME,
+    COMPANYURL,
+    COMPANYVAT,
+    // Random
+    RANDOMINT,
+    RANDOMINTBETWEEN,
+    RANDOMSTRING,
+    RANDOMBOOLEAN,
+    INCREMENTALINT,
+    // Dates
+    CURRENTDATETIME,
+    CURRENTTIMESTAMP,
+    RANDOMDATEBETWEEN,
+    //CUSTOM
+    CUSTOM,;
+}
