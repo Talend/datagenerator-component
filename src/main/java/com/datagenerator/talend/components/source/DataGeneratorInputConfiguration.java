@@ -37,7 +37,7 @@ public class DataGeneratorInputConfiguration implements Serializable {
     @Required
     @DefaultValue("false")
     @Documentation("Pseudo Streaming")
-    private Boolean pseudoStreaming;
+    private boolean pseudoStreaming;
 
     @Option
     @Documentation("Subset size")
