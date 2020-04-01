@@ -1,7 +1,8 @@
-package com.datagenerator.talend.components.dataset;
+package com.datagenerator.talend.components.source;
 
 import java.io.Serializable;
 
+import com.datagenerator.talend.components.dataset.DataGeneratorDataset;
 import org.talend.sdk.component.api.configuration.Option;
 import org.talend.sdk.component.api.configuration.condition.ActiveIf;
 import org.talend.sdk.component.api.configuration.constraint.Max;
@@ -24,8 +25,6 @@ import lombok.ToString;
 @Documentation("Data Generator Source Configuration")
 @ToString(callSuper = true)
 public class DataGeneratorInputConfiguration implements Serializable {
-
-    public static final String NAME = "DataGeneratorInputConfiguration";
 
     /*
      * DataSet

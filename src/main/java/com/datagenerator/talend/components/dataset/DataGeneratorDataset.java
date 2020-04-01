@@ -31,7 +31,7 @@ import static org.talend.sdk.component.api.configuration.ui.layout.GridLayout.Fo
         @GridLayout.Row({ "rows" }),
         @GridLayout.Row({ "fields" })
 })
-@GridLayout(names = ADVANCED, value = { @GridLayout.Row({"customLocale"}),  @GridLayout.Row({"locales"}),  @GridLayout.Row({"seed"}) })
+@GridLayout(names = ADVANCED, value = { @GridLayout.Row({"customLocale"}),  @GridLayout.Row({"locales"}), @GridLayout.Row({"customSeed"}),  @GridLayout.Row({"seed"}) })
 
 public class DataGeneratorDataset implements Serializable {
 

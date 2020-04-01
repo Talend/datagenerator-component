@@ -27,11 +27,11 @@ import com.datagenerator.talend.components.service.DataGeneratorComponentService
 @PartitionMapper(name = "DataGeneratorInput")
 @Documentation("TODO fill the documentation for this mapper")
 public class DataGeneratorInputMapper implements Serializable {
-    private final DataGeneratorInputMapperConfiguration configuration;
+    private final DataGeneratorInputConfiguration configuration;
     private final DataGeneratorComponentService service;
     private final RecordBuilderFactory recordBuilderFactory;
 
-    public DataGeneratorInputMapper(@Option("configuration") final DataGeneratorInputMapperConfiguration configuration,
+    public DataGeneratorInputMapper(@Option("configuration") final DataGeneratorInputConfiguration configuration,
                         final DataGeneratorComponentService service,
                         final RecordBuilderFactory recordBuilderFactory) {
         this.configuration = configuration;

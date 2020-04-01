@@ -19,7 +19,7 @@ import com.datagenerator.talend.components.service.DataGeneratorComponentService
 @Documentation("TODO fill the documentation for this source")
 public class DataGeneratorInputSource implements Serializable {
 
-    private final DataGeneratorInputMapperConfiguration configuration;
+    private final DataGeneratorInputConfiguration configuration;
     private final DataGeneratorComponentService service;
     private final RecordBuilderFactory builderFactory;
     private List<Faker> fakers;
@@ -28,7 +28,7 @@ public class DataGeneratorInputSource implements Serializable {
     private List<String> locales;
     private Integer iteration;
 
-    public DataGeneratorInputSource(@Option("configuration") final DataGeneratorInputMapperConfiguration configuration,
+    public DataGeneratorInputSource(@Option("configuration") final DataGeneratorInputConfiguration configuration,
                         final DataGeneratorComponentService service,
                         final RecordBuilderFactory builderFactory) {
         this.configuration = configuration;
@@ -40,7 +40,6 @@ public class DataGeneratorInputSource implements Serializable {
     public void init() {
         // this method will be executed once for the whole component execution,
         // this is where you can establish a connection for instance
-
 
         if(configuration.getDataset().getCustomLocale() == true) {
             locales = configuration.getDataset().getLocales();  // Get the different locales (countries for profiles)
@@ -58,14 +57,8 @@ public class DataGeneratorInputSource implements Serializable {
         // Create fairy
         for (String locale : locales)
         {
-            if(configuration.getDataset().getCustomSeed() == true) {
-                fakers.add(new Faker(new Locale(locale), new Random(seed)));
-            } else {
-                fakers.add(new Faker(new Locale(locale)));
-            }
-
+            fakers.add(new Faker(new Locale(locale)));
         }
-
         iteration = 0;
     }
 
