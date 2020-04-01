@@ -2,11 +2,15 @@ package com.datagenerator.talend.components.source;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import com.datagenerator.talend.components.dataset.FieldConfiguration;
+import com.github.javafaker.App;
 import com.github.javafaker.Faker;
 import org.talend.sdk.component.api.configuration.Option;
 import org.talend.sdk.component.api.input.Producer;
@@ -47,8 +51,6 @@ public class DataGeneratorInputSource implements Serializable {
             locales = new ArrayList<>(Collections.singleton(Locale.ENGLISH.toString()));
         }
 
-
-
         // List<String> locales = new ArrayList<>(Collections.singleton("en"));
         rows = configuration.getDataset().getRows();
         seed = configuration.getDataset().getSeed();
@@ -57,23 +59,21 @@ public class DataGeneratorInputSource implements Serializable {
         // Create fairy
         for (String locale : locales)
         {
-            fakers.add(new Faker(new Locale(locale)));
+            if(configuration.getDataset().getCustomSeed() == true) {
+                fakers.add(new Faker(new Locale(locale), new Random(seed)));
+            } else {
+                fakers.add(new Faker(new Locale(locale)));
+            }
         }
         iteration = 0;
+
     }
 
     @Producer
     public Record next() {
-        // this is the method allowing you to go through the dataset associated
-        // to the component configuration
-        //
-        // return null means the dataset has no more data to go through
-        // you can use the builderFactory to create a new Record
-
-        // First and foremost
-        // If rows limit is reached producer is stopped else rows decremented
 
         if (rows == 0) return null; else rows--;
+
         Random rand = new Random();
         Faker selected_faker = fakers.get(rand.nextInt(fakers.size()));
 
@@ -82,6 +82,15 @@ public class DataGeneratorInputSource implements Serializable {
 
         b = service.addFieldsToRecord(iteration, selected_faker, fields, b);
         iteration++;
+
+        if((iteration % configuration.getSubset()) == 0) {
+            try {
+                Thread.sleep(configuration.getDelay());
+            }
+            catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        }
 
         // Build the record and return
         return b.build();
