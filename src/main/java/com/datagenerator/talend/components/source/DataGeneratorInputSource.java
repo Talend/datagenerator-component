@@ -24,6 +24,7 @@ public class DataGeneratorInputSource implements Serializable {
     private final RecordBuilderFactory builderFactory;
     private List<Faker> fakers;
     private Long rows;
+    private Long seed;
     private List<String> locales;
     private Integer iteration;
 
@@ -47,14 +48,22 @@ public class DataGeneratorInputSource implements Serializable {
             locales = new ArrayList<>(Collections.singleton(Locale.ENGLISH.toString()));
         }
 
+
+
         // List<String> locales = new ArrayList<>(Collections.singleton("en"));
         rows = configuration.getDataset().getRows();
+        seed = configuration.getDataset().getSeed();
         fakers = new ArrayList<Faker>();
 
         // Create fairy
         for (String locale : locales)
         {
-            fakers.add(new Faker(new Locale("locale")));
+            if(configuration.getDataset().getCustomSeed() == true) {
+                fakers.add(new Faker(new Locale(locale), new Random(seed)));
+            } else {
+                fakers.add(new Faker(new Locale(locale)));
+            }
+
         }
 
         iteration = 0;
@@ -78,9 +87,7 @@ public class DataGeneratorInputSource implements Serializable {
         List<FieldConfiguration> fields = configuration.getDataset().getFields(); // Get list of fields from configuration
         Record.Builder b = builderFactory.newRecordBuilder(); // Create Record Builder instance
 
-        b = service.addFieldsToRecord(iteration,
-                                      selected_faker, fields, b);
-
+        b = service.addFieldsToRecord(iteration, selected_faker, fields, b);
         iteration++;
 
         // Build the record and return

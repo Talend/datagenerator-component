@@ -126,30 +126,4 @@ public class DataGeneratorComponentService {
         }
         return b;
     }
-
-    public String generateStringFromRegex(Pattern p, String prefix, int min, int max) {
-        if (min <= 0 && max >= 0 && p.matcher(prefix).matches())
-            return prefix;
-        if (max <= 0)
-            return null;
-
-        List<Character> candidates = new ArrayList<>(256);
-
-        // Only printable ASCII characters
-        for (char c = 31; c <= 126; c++) {
-            candidates.add(c);
-         }
-
-        Collections.shuffle(candidates);
-        for (char candidate : candidates) {
-            Matcher m = p.matcher(prefix + candidate);
-            if (m.matches() || m.hitEnd()) {
-                String match = generateStringFromRegex(p, prefix + candidate, min - 1, max - 1);
-                if (match != null) {
-                    return match;
-                }
-            }
-        }
-        return null;
-    }
 }

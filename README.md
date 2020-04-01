@@ -1,9 +1,13 @@
-# Data Generator
+<h1 align="center">
+  Data Generator
+</h1>
 <div align="center">
 
    <a href="https://github.com/tgourdel/datagenerator-component/actions">
        <img src="https://github.com/tgourdel/datagenerator-component/workflows/TCK%20component%20build/badge.svg"/>
    </a>
+
+___
 
 📦 [Download latest CAR archive](https://github.com/tgourdel/datagenerator-component/releases/latest/download/datagenerator-component.car)
 </div>
