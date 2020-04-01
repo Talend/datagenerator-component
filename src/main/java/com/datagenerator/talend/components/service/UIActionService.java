@@ -21,12 +21,13 @@ public class UIActionService extends DataGeneratorComponentService{
     public SuggestionValues getLocaleChoices(@Option final DataGeneratorDatastore datastore) {
 
             return new SuggestionValues(true, Arrays.asList(
-                    new SuggestionValues.Item("en", "English"),
-                    new SuggestionValues.Item("de", "Deutsch"),
-                    new SuggestionValues.Item("fr", "French"),
-                    new SuggestionValues.Item("es", "Spanish"),
-                    new SuggestionValues.Item("it", "Italian"),
-                    new SuggestionValues.Item("pl", "Polish")
+                    new SuggestionValues.Item("en-US", "US locale"),
+                    new SuggestionValues.Item("en_GB", "UK locale"),
+                    new SuggestionValues.Item("de", "DE locale"),
+                    new SuggestionValues.Item("fr", "FR locale"),
+                    new SuggestionValues.Item("es", "ES locale"),
+                    new SuggestionValues.Item("it", "IT locale"),
+                    new SuggestionValues.Item("pl", "PL locale")
             ));
     }
 }

@@ -1,11 +1,8 @@
 package com.datagenerator.talend.components.dataset;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import com.datagenerator.talend.components.service.TimeZones;
 import lombok.Data;
 import lombok.ToString;
 
@@ -34,7 +31,7 @@ import static org.talend.sdk.component.api.configuration.ui.layout.GridLayout.Fo
         @GridLayout.Row({ "rows" }),
         @GridLayout.Row({ "fields" })
 })
-@GridLayout(names = ADVANCED, value = { @GridLayout.Row({"customLocale"}),  @GridLayout.Row({"locales"})} )
+@GridLayout(names = ADVANCED, value = { @GridLayout.Row({"customLocale"}),  @GridLayout.Row({"locales"}), @GridLayout.Row({"customSeed"}),  @GridLayout.Row({"seed"}) })
 
 public class DataGeneratorDataset implements Serializable {
 
@@ -66,5 +63,17 @@ public class DataGeneratorDataset implements Serializable {
     @ActiveIf(target = "customLocale", value = { "true" })
     @Suggestable(value = LOCALE_CHOICES, parameters = { "../datastore" })
     private List<String> locales;
+
+    @Option
+    @Required
+    @DefaultValue("false")
+    @Documentation("Custom Seed")
+    private Boolean customSeed;
+
+    @Option
+    @DefaultValue("123456")
+    @Documentation("Seed")
+    @ActiveIf(target = "customSeed", value = { "true" })
+    private Long seed;
 
 }
