@@ -56,7 +56,7 @@ public class DataGeneratorDataset implements Serializable {
     @Required
     @DefaultValue("false")
     @Documentation("Custom Locale")
-    private Boolean customLocale;
+    private boolean customLocale;
 
     @Option
     @Documentation("Locales")

@@ -42,21 +42,20 @@ public class DataGeneratorInputSource implements Serializable {
 
     @PostConstruct
     public void init() {
-        // this method will be executed once for the whole component execution,
-        // this is where you can establish a connection for instance
+        // initialization
+        rows = configuration.getDataset().getRows();
+        seed = configuration.getDataset().getSeed();
+        iteration = 0;
+        fakers = new ArrayList<Faker>();
 
-        if(configuration.getDataset().getCustomLocale() == true) {
-            locales = configuration.getDataset().getLocales();  // Get the different locales (countries for profiles)
+        // custom locales
+        if(configuration.getDataset().isCustomLocale()) {
+            locales = configuration.getDataset().getLocales();
         } else {
             locales = new ArrayList<>(Collections.singleton(Locale.ENGLISH.toString()));
         }
 
-        // List<String> locales = new ArrayList<>(Collections.singleton("en"));
-        rows = configuration.getDataset().getRows();
-        seed = configuration.getDataset().getSeed();
-        fakers = new ArrayList<Faker>();
-
-        // Create fairy
+        // create faker generators and add to list
         for (String locale : locales)
         {
             if(configuration.getDataset().getCustomSeed() == true) {
@@ -65,30 +64,36 @@ public class DataGeneratorInputSource implements Serializable {
                 fakers.add(new Faker(new Locale(locale)));
             }
         }
-        iteration = 0;
-
     }
 
     @Producer
     public Record next() {
-
+        // check remaining rows
         if (rows == 0) return null; else rows--;
 
+        // use random faker within the list
         Random rand = new Random();
         Faker selected_faker = fakers.get(rand.nextInt(fakers.size()));
 
-        List<FieldConfiguration> fields = configuration.getDataset().getFields(); // Get list of fields from configuration
-        Record.Builder b = builderFactory.newRecordBuilder(); // Create Record Builder instance
+        // get list of fields from configuration
+        List<FieldConfiguration> fields = configuration.getDataset().getFields();
 
+        // Create Record Builder instance
+        Record.Builder b = builderFactory.newRecordBuilder();
         b = service.addFieldsToRecord(iteration, selected_faker, fields, b);
+
+        // increment iteration
         iteration++;
 
-        if((iteration % configuration.getSubset()) == 0) {
-            try {
-                Thread.sleep(configuration.getDelay());
-            }
-            catch(InterruptedException ex) {
-                Thread.currentThread().interrupt();
+        // if pseudo streaming enabled
+        if(configuration.isPseudoStreaming()) {
+            if ((iteration % configuration.getSubset()) == 0) {
+                try {
+                    // sleep for delay every subset
+                    Thread.sleep(configuration.getDelay());
+                } catch (InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
             }
         }
 
