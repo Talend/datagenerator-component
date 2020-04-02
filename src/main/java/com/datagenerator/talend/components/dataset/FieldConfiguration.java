@@ -17,6 +17,8 @@ import java.time.LocalDateTime;
 
 import lombok.Data;
 
+import static com.datagenerator.talend.components.service.Codes.ISBN10;
+
 @Data
 @OptionsOrder({ "name", "type", "regex", "length", "min", "max", "startTime", "endTime", "increment", "code"})
 public class FieldConfiguration implements Serializable {
@@ -83,6 +85,7 @@ public class FieldConfiguration implements Serializable {
     @Option
     @Required
     @Documentation("Codes")
+    @DefaultValue("ISBN10")
     @ActiveIf(target = "type", value = {"STANDARDCODE"})
-    private Codes code;
+    private Codes code = ISBN10;
 }

@@ -177,6 +177,24 @@ public class DataGeneratorComponentService {
                     case ANIMAL:
                         b.withString(field.getName(), fake.animal().name());
                         break;
+                    case AIRCRAFT:
+                        b.withString(field.getName(), fake.aviation().aircraft());
+                        break;
+                    case AIRPORT:
+                        b.withString(field.getName(), fake.aviation().airport());
+                        break;
+                    case FILENAME:
+                        b.withString(field.getName(), fake.file().fileName());
+                        break;
+                    case FILEEXTENSION:
+                        b.withString(field.getName(), fake.file().extension());
+                        break;
+                    case COLORNAME:
+                        b.withString(field.getName(), fake.color().name());
+                        break;
+                    case COLORHEX:
+                        b.withString(field.getName(), fake.color().hex());
+                        break;
                     default:  b.withString(field.getName(),"Something went wrong");
                 }
         }
