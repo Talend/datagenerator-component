@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import com.datagenerator.talend.components.DataGeneratorRuntimeException;
 import com.datagenerator.talend.components.dataset.FieldConfiguration;
 import com.github.javafaker.App;
 import com.github.javafaker.Faker;
@@ -47,6 +48,13 @@ public class DataGeneratorInputSource implements Serializable {
         seed = configuration.getDataset().getSeed();
         iteration = 0;
         fakers = new ArrayList<Faker>();
+
+        // safeguards
+        if(configuration.isPseudoStreaming()) {
+            if (configuration.getSubset() > rows) {
+                throw new DataGeneratorRuntimeException("With Pseudo Streaming enabled the subset cannot be bigger than the total number of rows. Please check your source configuration.");
+            }
+        }
 
         // custom locales
         if(configuration.getDataset().isCustomLocale()) {

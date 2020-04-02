@@ -49,14 +49,14 @@ public class FieldConfiguration implements Serializable {
     @Required
     @Documentation("Min")
     @DefaultValue("1")
-    @ActiveIf(target = "type", value = {"RANDOMSTRING", "RANDOMINTBETWEEN", "INCREMENTALINT"} )
+    @ActiveIf(target = "type", value = {"PASSWORD", "RANDOMSTRING", "RANDOMINTBETWEEN", "INCREMENTALINT"} )
     private Integer min = 1;
 
     @Option
     @Required
     @Documentation("Max")
     @DefaultValue("30")
-    @ActiveIf(target = "type", value = {"RANDOMSTRING", "RANDOMINTBETWEEN", "RANDOMINT"})
+    @ActiveIf(target = "type", value = {"PASSWORD", "RANDOMSTRING", "RANDOMINTBETWEEN", "RANDOMINT"})
     private Integer max = 10;
 
     @Option

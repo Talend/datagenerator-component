@@ -35,6 +35,9 @@ public class DataGeneratorComponentService {
                     case SEX:
                         b.withString(field.getName(), fake.demographic().sex());
                         break;
+                    case MARITALSTATUS:
+                        b.withString(field.getName(), fake.demographic().maritalStatus());
+                        break;
                     case EMAIL:
                         b.withString(field.getName(), fake.internet().emailAddress());
                         break;
@@ -42,7 +45,7 @@ public class DataGeneratorComponentService {
                         b.withString(field.getName(), fake.name().username());
                         break;
                     case PASSWORD:
-                        b.withString(field.getName(), fake.internet().password());
+                        b.withString(field.getName(), fake.internet().password(field.getMin(), field.getMax()));
                         break;
                     case DATEOFBIRTH:
                         b.withDateTime(field.getName(), fake.date().birthday());
@@ -120,6 +123,25 @@ public class DataGeneratorComponentService {
                         break;
                     case RANDOMDATEBETWEEN:
                         b.withDateTime(field.getName(), fake.date().between(java.sql.Date.valueOf(field.getStartTime()), java.sql.Date.valueOf(field.getEndTime())));
+                        break;
+                    // Funny
+                    case BEER:
+                        b.withString(field.getName(), fake.beer().name());
+                        break;
+                    case BEERSTYLE:
+                        b.withString(field.getName(), fake.beer().style());
+                        break;
+                    case BOOKGENRE:
+                        b.withString(field.getName(), fake.book().genre());
+                        break;
+                    case BOOKTITLE:
+                        b.withString(field.getName(), fake.book().title());
+                        break;
+                    case BOOKAUTHOR:
+                        b.withString(field.getName(), fake.book().author());
+                        break;
+                    case BOOKPUBLISHER:
+                        b.withString(field.getName(), fake.book().publisher());
                         break;
                     default:  // code block
                 }

@@ -11,8 +11,8 @@
   <version>0.5</version>
   <packaging>jar</packaging>
 
-  <name>A Component Family</name>
-  <description>Data Generator project</description>
+  <name>Data Generator</name>
+  <description>Data Generator component for Talend Pipeline Designer</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -50,8 +50,8 @@ public class DataGeneratorInputConfiguration implements Serializable {
     @Option
     @Documentation("Delay (ms)")
     @DefaultValue("5000")
-    @Min(1)
-    @Max(1000000000)
+    @Min(1000)
+    @Max(600000)
     @ActiveIf(target = "pseudoStreaming", value = { "true" })
     private Integer delay = 5000;
 }

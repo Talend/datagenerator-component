@@ -11,6 +11,7 @@ public enum Types{
     USERNAME,
     PASSWORD,
     SEX,
+    MARITALSTATUS,
     DATEOFBIRTH,
     TELEPHONENUMBER,
     NATIONALITY,
@@ -27,7 +28,6 @@ public enum Types{
     COMPANYDOMAIN,
     COMPANYNAME,
     COMPANYURL,
-    COMPANYVAT,
     // Random
     RANDOMINT,
     RANDOMINTBETWEEN,
@@ -39,5 +39,12 @@ public enum Types{
     CURRENTTIMESTAMP,
     RANDOMDATEBETWEEN,
     //CUSTOM
-    CUSTOM,;
+    CUSTOM,
+    //FUNNY
+    BEER,
+    BEERSTYLE,
+    BOOKTITLE,
+    BOOKGENRE,
+    BOOKAUTHOR,
+    BOOKPUBLISHER;
 }
