@@ -83,7 +83,6 @@ public class FieldConfiguration implements Serializable {
     private Integer increment = 1;
 
     @Option
-    @Required
     @Documentation("Codes")
     @DefaultValue("ISBN10")
     @ActiveIf(target = "type", value = {"STANDARDCODE"})
