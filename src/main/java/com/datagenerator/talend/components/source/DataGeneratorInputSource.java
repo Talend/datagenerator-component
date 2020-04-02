@@ -13,6 +13,7 @@ import com.datagenerator.talend.components.DataGeneratorRuntimeException;
 import com.datagenerator.talend.components.dataset.FieldConfiguration;
 import com.github.javafaker.App;
 import com.github.javafaker.Faker;
+import lombok.extern.slf4j.Slf4j;
 import org.talend.sdk.component.api.configuration.Option;
 import org.talend.sdk.component.api.input.Producer;
 import org.talend.sdk.component.api.meta.Documentation;
@@ -21,6 +22,7 @@ import org.talend.sdk.component.api.service.record.RecordBuilderFactory;
 
 import com.datagenerator.talend.components.service.DataGeneratorComponentService;
 
+@Slf4j
 @Documentation("TODO fill the documentation for this source")
 public class DataGeneratorInputSource implements Serializable {
 
@@ -51,13 +53,17 @@ public class DataGeneratorInputSource implements Serializable {
 
         // safeguards
         if(configuration.isPseudoStreaming()) {
+            log.info("Pseudo streaming is enabled.");
             if (configuration.getSubset() > rows) {
-                throw new DataGeneratorRuntimeException("With Pseudo Streaming enabled the subset cannot be bigger than the total number of rows. Please check your source configuration.");
+                log.error("Subset is greater than total rows.");
+                throw new DataGeneratorRuntimeException("With Pseudo Streaming enabled the subset cannot be greater " +
+                        "than the total number of rows. Please check your source configuration.");
             }
         }
 
         // custom locales
         if(configuration.getDataset().getCustomLocale() == true) {
+            log.info("Custom locales is enabled.");
             locales = configuration.getDataset().getLocales();
         } else {
             locales = new ArrayList<>(Collections.singleton(Locale.ENGLISH.toString()));
@@ -67,6 +73,7 @@ public class DataGeneratorInputSource implements Serializable {
         for (String locale : locales)
         {
             if(configuration.getDataset().getCustomSeed() == true) {
+                log.info("Custom seed is enabled.");
                 fakers.add(new Faker(new Locale(locale), new Random(seed)));
             } else {
                 fakers.add(new Faker(new Locale(locale)));

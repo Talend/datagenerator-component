@@ -28,6 +28,7 @@ public class FieldConfiguration implements Serializable {
 
     @Option
     @Required
+    @DefaultValue("RANDOMSTRING")
     @Documentation("types")
     private Types type;
 
@@ -50,15 +51,15 @@ public class FieldConfiguration implements Serializable {
     @Required
     @Documentation("Min")
     @DefaultValue("1")
-    @ActiveIf(target = "type", value = {"PASSWORD", "RANDOMSTRING", "RANDOMINTBETWEEN", "INCREMENTALINT"} )
-    private Integer min = 1;
+    @ActiveIf(target = "type", value = {"AGE", "PASSWORD", "RANDOMSTRING", "RANDOMINTBETWEEN", "INCREMENTALINT"} )
+    private Integer min = 0;
 
     @Option
     @Required
     @Documentation("Max")
-    @DefaultValue("30")
-    @ActiveIf(target = "type", value = {"PASSWORD", "RANDOMSTRING", "RANDOMINTBETWEEN", "RANDOMINT"})
-    private Integer max = 10;
+    @DefaultValue("100")
+    @ActiveIf(target = "type", value = {"AGE", "PASSWORD", "RANDOMSTRING", "RANDOMINTBETWEEN", "RANDOMINT"})
+    private Integer max = 100;
 
     @Option
     @Required
@@ -82,5 +83,6 @@ public class FieldConfiguration implements Serializable {
     @Option
     @Required
     @Documentation("Codes")
+    @ActiveIf(target = "type", value = {"STANDARDCODE"})
     private Codes code;
 }

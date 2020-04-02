@@ -32,6 +32,9 @@ public class DataGeneratorComponentService {
                     case MIDDLENAME:
                         b.withString(field.getName(), fake.name().nameWithMiddle());
                         break;
+                    case AGE:
+                        b.withInt(field.getName(), fake.number().numberBetween(field.getMin(), field.getMax()));
+                        break;
                     case SEX:
                         b.withString(field.getName(), fake.demographic().sex());
                         break;
