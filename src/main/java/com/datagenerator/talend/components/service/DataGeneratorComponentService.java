@@ -209,7 +209,7 @@ public class DataGeneratorComponentService {
                     case COLORHEX:
                         b.withString(field.getName(), fake.color().hex());
                         break;
-                    default:  b.withString(field.getName(),"Something went wrong");
+                    default:  b.withString(field.getName(),"error: field type not found");
                 }
         }
         return b;
