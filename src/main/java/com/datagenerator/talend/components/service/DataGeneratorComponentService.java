@@ -98,18 +98,32 @@ public class DataGeneratorComponentService {
                     case COMPANYURL:
                         b.withString(field.getName(), fake.company().url());
                         break;
-                    case STANDARDCODE:
-                        switch (field.getCode()) {
-                            case ASIN: b.withString(field.getName(), fake.code().asin()); break;
-                            case EAN8: b.withString(field.getName(), fake.code().ean8()); break;
-                            case EAN13: b.withString(field.getName(), fake.code().ean13()); break;
-                            case GTIN8: b.withString(field.getName(), fake.code().gtin8()); break;
-                            case GTIN13: b.withString(field.getName(), fake.code().gtin13()); break;
-                            case IMEI: b.withString(field.getName(), fake.code().imei()); break;
-                            case ISBN10: b.withString(field.getName(), fake.code().isbn10()); break;
-                            case ISBN13: b.withString(field.getName(), fake.code().isbn13()); break;
-                            default: b.withString(field.getName(), "Something went wrong"); break;
-                        }
+                    case ISBN10:
+                        b.withString(field.getName(), fake.code().isbn10());
+                        break;
+                    case ISBN13:
+                        b.withString(field.getName(), fake.code().isbn13());
+                        break;
+                    case IMEI:
+                        b.withString(field.getName(), fake.code().imei());
+                        break;
+                    case ASIN:
+                        b.withString(field.getName(), fake.code().asin());
+                        break;
+                    case EAN8:
+                        b.withString(field.getName(), fake.code().ean8());
+                        break;
+                    case EAN13:
+                        b.withString(field.getName(), fake.code().ean13());
+                        break;
+                    case GTIN8:
+                        b.withString(field.getName(), fake.code().gtin8());
+                        break;
+                    case GTIN13:
+                        b.withString(field.getName(), fake.code().gtin13());
+                        break;
+                    case FREETEXT:
+                        b.withString(field.getName(), field.getFreetext());
                         break;
                     // Random
                     case RANDOMINTBETWEEN:

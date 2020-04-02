@@ -65,4 +65,5 @@ Once a **Data Generator** connection have been created you can set up a dataset:
 ## 📝 ToDo
 
  - Implement all the functions from the library.
+ - Add place / coordinates functions
  - ~~Implement pseudo streaming~~ ✔

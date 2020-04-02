@@ -2,16 +2,12 @@ package com.datagenerator.talend.components.source;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import com.datagenerator.talend.components.DataGeneratorRuntimeException;
 import com.datagenerator.talend.components.dataset.FieldConfiguration;
-import com.github.javafaker.App;
 import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
 import org.talend.sdk.component.api.configuration.Option;
@@ -47,9 +43,17 @@ public class DataGeneratorInputSource implements Serializable {
     public void init() {
         // initialization
         rows = configuration.getDataset().getRows();
-        seed = configuration.getDataset().getSeed();
+        log.info("===== configuration =====");
+        log.info("===== rows: " + rows);
+        if(configuration.getDataset().getCustomSeed() == true) {
+            seed = configuration.getDataset().getSeed();
+            log.info("===== seed: " + rows);
+        } else {
+            log.info("===== no seed specified");
+        }
         iteration = 0;
         fakers = new ArrayList<Faker>();
+        log.info("===== fakers: " + fakers.toString());
 
         // safeguards
         if(configuration.isPseudoStreaming()) {

@@ -28,7 +28,14 @@ public enum Types{
     COMPANYDOMAIN,
     COMPANYNAME,
     COMPANYURL,
-    STANDARDCODE,
+    ASIN,
+    EAN8,
+    EAN13,
+    GTIN8,
+    GTIN13,
+    IMEI,
+    ISBN10,
+    ISBN13,
     // Random
     RANDOMINT,
     RANDOMINTBETWEEN,
@@ -59,6 +66,7 @@ public enum Types{
     FILENAME,
     FILEEXTENSION,
     COLORNAME,
-    COLORHEX;
+    COLORHEX,
+    FREETEXT;
 
 }

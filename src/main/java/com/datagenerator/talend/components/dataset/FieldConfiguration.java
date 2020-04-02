@@ -9,6 +9,7 @@ import org.talend.sdk.component.api.configuration.constraint.Min;
 import org.talend.sdk.component.api.configuration.constraint.Required;
 import org.talend.sdk.component.api.configuration.ui.DefaultValue;
 import org.talend.sdk.component.api.configuration.ui.OptionsOrder;
+import org.talend.sdk.component.api.configuration.ui.widget.TextArea;
 import org.talend.sdk.component.api.meta.Documentation;
 
 import java.io.Serializable;
@@ -20,7 +21,7 @@ import lombok.Data;
 import static com.datagenerator.talend.components.service.Codes.ISBN10;
 
 @Data
-@OptionsOrder({ "name", "type", "regex", "length", "min", "max", "startTime", "endTime", "increment", "code"})
+@OptionsOrder({ "name", "type", "regex", "length", "min", "max", "startTime", "endTime", "increment", "freetext"})
 public class FieldConfiguration implements Serializable {
 
     @Option
@@ -83,8 +84,8 @@ public class FieldConfiguration implements Serializable {
     private Integer increment = 1;
 
     @Option
-    @Documentation("Codes")
-    @DefaultValue("ISBN10")
-    @ActiveIf(target = "type", value = {"STANDARDCODE"})
-    private Codes code = ISBN10;
+    @TextArea
+    @Documentation("Text")
+    @ActiveIf(target = "type", value = {"FREETEXT"})
+    private String freetext = "";
 }
