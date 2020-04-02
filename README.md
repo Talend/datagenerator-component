@@ -9,6 +9,7 @@
    <a href="http://www.apache.org/licenses/LICENSE-2.0.html">
        <img src="http://img.shields.io/:license-apache-brightgreen.svg"/>
    </a>
+   
 ___
 
 📦 [Download latest CAR archive](https://github.com/tgourdel/datagenerator-component/releases/latest/download/datagenerator-component.car)

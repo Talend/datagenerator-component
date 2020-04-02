@@ -57,7 +57,7 @@ public class DataGeneratorInputSource implements Serializable {
         }
 
         // custom locales
-        if(configuration.getDataset().isCustomLocale()) {
+        if(configuration.getDataset().getCustomLocale() == true) {
             locales = configuration.getDataset().getLocales();
         } else {
             locales = new ArrayList<>(Collections.singleton(Locale.ENGLISH.toString()));

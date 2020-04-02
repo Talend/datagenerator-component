@@ -1,5 +1,6 @@
 package com.datagenerator.talend.components.dataset;
 
+import com.datagenerator.talend.components.service.Codes;
 import com.datagenerator.talend.components.service.Types;
 import org.talend.sdk.component.api.configuration.Option;
 import org.talend.sdk.component.api.configuration.condition.ActiveIf;
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
-@OptionsOrder({ "name", "type", "regex", "length", "min", "max", "startTime", "endTime", "increment"})
+@OptionsOrder({ "name", "type", "regex", "length", "min", "max", "startTime", "endTime", "increment", "code"})
 public class FieldConfiguration implements Serializable {
 
     @Option
@@ -77,4 +78,9 @@ public class FieldConfiguration implements Serializable {
     @DefaultValue("1")
     @ActiveIf(target = "type", value = {"INCREMENTALINT"})
     private Integer increment = 1;
+
+    @Option
+    @Required
+    @Documentation("Codes")
+    private Codes code;
 }

@@ -95,6 +95,19 @@ public class DataGeneratorComponentService {
                     case COMPANYURL:
                         b.withString(field.getName(), fake.company().url());
                         break;
+                    case STANDARDCODE:
+                        switch (field.getCode()) {
+                            case ASIN: b.withString(field.getName(), fake.code().asin()); break;
+                            case EAN8: b.withString(field.getName(), fake.code().ean8()); break;
+                            case EAN13: b.withString(field.getName(), fake.code().ean13()); break;
+                            case GTIN8: b.withString(field.getName(), fake.code().gtin8()); break;
+                            case GTIN13: b.withString(field.getName(), fake.code().gtin13()); break;
+                            case IMEI: b.withString(field.getName(), fake.code().imei()); break;
+                            case ISBN10: b.withString(field.getName(), fake.code().isbn10()); break;
+                            case ISBN13: b.withString(field.getName(), fake.code().isbn13()); break;
+                            default: b.withString(field.getName(), "Something went wrong"); break;
+                        }
+                        break;
                     // Random
                     case RANDOMINTBETWEEN:
                         b.withInt(field.getName(), fake.number().numberBetween(field.getMin(), field.getMax()));
@@ -143,7 +156,25 @@ public class DataGeneratorComponentService {
                     case BOOKPUBLISHER:
                         b.withString(field.getName(), fake.book().publisher());
                         break;
-                    default:  // code block
+                    case APPNAME:
+                        b.withString(field.getName(), fake.app().name());
+                        break;
+                    case APPVERSION:
+                        b.withString(field.getName(), fake.app().version());
+                        break;
+                    case TEMPERATURECELSIUS:
+                        b.withString(field.getName(), fake.weather().temperatureCelsius(field.getMin(), field.getMax()));
+                        break;
+                    case TEMPERATUREFAHRENHEIT:
+                        b.withString(field.getName(), fake.weather().temperatureFahrenheit(field.getMin(), field.getMax()));
+                        break;
+                    case WEATHER:
+                        b.withString(field.getName(), fake.weather().description());
+                        break;
+                    case ANIMAL:
+                        b.withString(field.getName(), fake.animal().name());
+                        break;
+                    default:  b.withString(field.getName(),"Something went wrong");
                 }
         }
         return b;
