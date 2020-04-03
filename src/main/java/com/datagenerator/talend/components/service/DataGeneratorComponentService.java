@@ -87,7 +87,7 @@ public class DataGeneratorComponentService {
                         b.withString(field.getName(), fake.business().creditCardType());
                         break;
                     case PASSPORTNUMBER:
-                        b.withString(field.getName(), fake.regexify("^(?!^0+$)[a-zA-Z0-9]{3,20}$"));
+                        b.withString(field.getName(), fake.regexify("[A-Z]{1}[0-9]{7}"));
                         break;
                     case COMPANYDOMAIN:
                         b.withString(field.getName(), fake.company().industry());

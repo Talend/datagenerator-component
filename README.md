@@ -19,7 +19,7 @@ ___
 
 The Data Generator component has been developed for Talend Pipeline Designer. It is meant to generate random and mock data in a pipeline.
 
-![add_data_generator_dataset](https://user-images.githubusercontent.com/15718239/78036558-b9411800-736a-11ea-97a5-0c6ed55d2093.png)
+![add_data_generator_dataset](https://user-images.githubusercontent.com/15718239/78310956-c5d29580-754f-11ea-90a1-03e333507697.png)
 
 ## Adding to the Remote Engine for Pipelines
 
