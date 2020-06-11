@@ -1,6 +1,7 @@
 package com.datagenerator.talend.components.source;
 
 import java.io.Serializable;
+import java.time.ZoneId;
 import java.util.*;
 
 import javax.annotation.PostConstruct;
@@ -8,6 +9,9 @@ import javax.annotation.PreDestroy;
 
 import com.datagenerator.talend.components.DataGeneratorRuntimeException;
 import com.datagenerator.talend.components.dataset.FieldConfiguration;
+import com.datagenerator.talend.components.dataset.ListConfiguration;
+import com.datagenerator.talend.components.service.TimeZones;
+import com.datagenerator.talend.components.service.WeightedList;
 import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
 import org.talend.sdk.component.api.configuration.Option;
@@ -17,6 +21,8 @@ import org.talend.sdk.component.api.record.Record;
 import org.talend.sdk.component.api.service.record.RecordBuilderFactory;
 
 import com.datagenerator.talend.components.service.DataGeneratorComponentService;
+
+import static com.datagenerator.talend.components.service.Types.RANDOMWITHINLIST;
 
 @Slf4j
 @Documentation("TODO fill the documentation for this source")
@@ -28,8 +34,10 @@ public class DataGeneratorInputSource implements Serializable {
     private List<Faker> fakers;
     private Long rows;
     private Long seed;
+    private ZoneId zone;
     private List<String> locales;
     private Integer iteration;
+    private HashMap<String, WeightedList<String>> weightedlists;
 
     public DataGeneratorInputSource(@Option("configuration") final DataGeneratorInputConfiguration configuration,
                         final DataGeneratorComponentService service,
@@ -53,6 +61,12 @@ public class DataGeneratorInputSource implements Serializable {
         }
         iteration = 0;
         fakers = new ArrayList<Faker>();
+        if(configuration.getDataset().getZone() == TimeZones.DEFAULT) {
+            zone = ZoneId.systemDefault();
+        } else {
+            zone = ZoneId.of(configuration.getDataset().getZone().getName());
+        }
+
         log.info("===== fakers: " + fakers.toString());
 
         // safeguards
@@ -83,6 +97,19 @@ public class DataGeneratorInputSource implements Serializable {
                 fakers.add(new Faker(new Locale(locale)));
             }
         }
+
+        // Random Lists
+        weightedlists = new HashMap<String, WeightedList<String>>();
+        for (FieldConfiguration element : configuration.getDataset().getFields())
+        {
+            if(element.getType() == RANDOMWITHINLIST) {
+                WeightedList<String> wlist = new WeightedList<>();
+                for(ListConfiguration item : element.getRandomwithinlist()) {
+                    wlist.addEntry(item.getItem(), item.getWeight());
+                }
+                weightedlists.put(element.getName(), wlist);
+            }
+        }
     }
 
     @Producer
@@ -97,9 +124,9 @@ public class DataGeneratorInputSource implements Serializable {
         // get list of fields from configuration
         List<FieldConfiguration> fields = configuration.getDataset().getFields();
 
-        // Create Record Builder instance
+        // create Record Builder instance
         Record.Builder b = builderFactory.newRecordBuilder();
-        b = service.addFieldsToRecord(iteration, selected_faker, fields, b);
+        b = service.addFieldsToRecord(iteration, selected_faker, weightedlists, fields, zone, b);
 
         // increment iteration
         iteration++;

@@ -13,11 +13,12 @@ import org.talend.sdk.component.api.meta.Documentation;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 import lombok.Data;
 
 @Data
-@OptionsOrder({ "name", "type", "regex", "length", "min", "max", "startTime", "endTime", "increment", "freetext"})
+@OptionsOrder({ "name", "type", "regex", "length", "min", "max", "startTime", "endTime", "increment", "freetext", "randomwithinlist"})
 public class FieldConfiguration implements Serializable {
 
     @Option
@@ -43,7 +44,7 @@ public class FieldConfiguration implements Serializable {
     @Required
     @Documentation("Length")
     @DefaultValue("6")
-    @ActiveIf(target = "type", value = {} )
+    @ActiveIf(target = "type", value = {"RANDOMINT"} )
     private Integer length = 6;
 
     @Option
@@ -57,7 +58,7 @@ public class FieldConfiguration implements Serializable {
     @Required
     @Documentation("Max")
     @DefaultValue("100")
-    @ActiveIf(target = "type", value = {"AGE", "PASSWORD", "RANDOMSTRING", "RANDOMINTBETWEEN", "RANDOMINT"})
+    @ActiveIf(target = "type", value = {"AGE", "PASSWORD", "RANDOMSTRING", "RANDOMINTBETWEEN"})
     private Integer max = 100;
 
     @Option
@@ -84,4 +85,9 @@ public class FieldConfiguration implements Serializable {
     @Documentation("Text")
     @ActiveIf(target = "type", value = {"FREETEXT"})
     private String freetext = "";
+
+    @Option
+    @Documentation("List")
+    @ActiveIf(target = "type", value = {"RANDOMWITHINLIST"})
+    private List<ListConfiguration> randomwithinlist;
 }

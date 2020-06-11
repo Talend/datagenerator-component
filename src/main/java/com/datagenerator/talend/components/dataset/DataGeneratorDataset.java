@@ -3,6 +3,7 @@ package com.datagenerator.talend.components.dataset;
 import java.io.Serializable;
 import java.util.List;
 
+import com.datagenerator.talend.components.service.TimeZones;
 import lombok.Data;
 import lombok.ToString;
 
@@ -32,7 +33,13 @@ import static org.talend.sdk.component.api.configuration.ui.layout.GridLayout.Fo
         @GridLayout.Row({ "rows" }),
         @GridLayout.Row({ "fields" })
 })
-@GridLayout(names = ADVANCED, value = { @GridLayout.Row({"customLocale"}),  @GridLayout.Row({"locales"}), @GridLayout.Row({"customSeed"}),  @GridLayout.Row({"seed"}) })
+@GridLayout(names = ADVANCED, value = {
+        @GridLayout.Row({"customLocale"}),
+        @GridLayout.Row({"locales"}),
+        @GridLayout.Row({"customSeed"}),
+        @GridLayout.Row({"seed"}),
+        @GridLayout.Row({"zone"})
+})
 
 public class DataGeneratorDataset implements Serializable {
 
@@ -76,5 +83,10 @@ public class DataGeneratorDataset implements Serializable {
     @Documentation("Seed")
     @ActiveIf(target = "customSeed", value = { "true" })
     private Long seed;
+
+    @Option
+    @DefaultValue("GMTP00")
+    @Documentation("Time zone")
+    private TimeZones zone = TimeZones.GMTP00;
 
 }

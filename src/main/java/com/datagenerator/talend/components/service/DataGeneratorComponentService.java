@@ -4,6 +4,10 @@ import com.datagenerator.talend.components.dataset.FieldConfiguration;
 import com.github.javafaker.Faker;
 import org.talend.sdk.component.api.record.Record;
 import org.talend.sdk.component.api.service.Service;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,9 +16,12 @@ import java.util.regex.Pattern;
 public class DataGeneratorComponentService {
 
     public Record.Builder addFieldsToRecord(Integer iterator,
-                                            Faker fake, List<FieldConfiguration> fields, Record.Builder b) {
+                                            Faker fake, HashMap<String, WeightedList<String>> weightedlists,
+                                            List<FieldConfiguration> fields,
+                                            ZoneId id, Record.Builder b) {
 
-        Date date = new Date();
+        LocalDateTime now = LocalDateTime.now();
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(now, id);
 
         // For each field select we add a value to the record
         for (FieldConfiguration field : fields) {
@@ -53,8 +60,11 @@ public class DataGeneratorComponentService {
                     case DATEOFBIRTH:
                         b.withDateTime(field.getName(), fake.date().birthday());
                         break;
-                    case TELEPHONENUMBER:
+                    case PHONENUMBER:
                         b.withString(field.getName(), fake.phoneNumber().phoneNumber());
+                        break;
+                    case CELLPHONE:
+                        b.withString(field.getName(), fake.phoneNumber().cellPhone());
                         break;
                     case NATIONALITY:
                         b.withString(field.getName(), fake.country().name());
@@ -65,11 +75,20 @@ public class DataGeneratorComponentService {
                     case CITY:
                         b.withString(field.getName(), fake.address().city());
                         break;
+                    case STATE:
+                        b.withString(field.getName(), fake.address().state());
+                        break;
+                    case STATEABBR:
+                        b.withString(field.getName(), fake.address().stateAbbr());
+                        break;
                     case POSTALCODE:
                         b.withString(field.getName(), fake.address().zipCode());
                         break;
                     case STREETADDRESS:
                         b.withString(field.getName(), fake.address().streetAddress());
+                        break;
+                    case FULLADDRESS:
+                        b.withString(field.getName(), fake.address().fullAddress());
                         break;
                     case STREETNUMBER:
                         b.withString(field.getName(), fake.address().streetAddressNumber());
@@ -98,29 +117,14 @@ public class DataGeneratorComponentService {
                     case COMPANYURL:
                         b.withString(field.getName(), fake.company().url());
                         break;
+                    case UUID:
+                        b.withString(field.getName(), fake.internet().uuid());
+                        break;
                     case ISBN10:
                         b.withString(field.getName(), fake.code().isbn10());
                         break;
                     case ISBN13:
                         b.withString(field.getName(), fake.code().isbn13());
-                        break;
-                    case IMEI:
-                        b.withString(field.getName(), fake.code().imei());
-                        break;
-                    case ASIN:
-                        b.withString(field.getName(), fake.code().asin());
-                        break;
-                    case EAN8:
-                        b.withString(field.getName(), fake.code().ean8());
-                        break;
-                    case EAN13:
-                        b.withString(field.getName(), fake.code().ean13());
-                        break;
-                    case GTIN8:
-                        b.withString(field.getName(), fake.code().gtin8());
-                        break;
-                    case GTIN13:
-                        b.withString(field.getName(), fake.code().gtin13());
                         break;
                     case FREETEXT:
                         b.withString(field.getName(), field.getFreetext());
@@ -132,11 +136,14 @@ public class DataGeneratorComponentService {
                     case RANDOMSTRING:
                         b.withString(field.getName(), fake.regexify("(\\w){" + field.getMin().toString() + "," + field.getMax().toString() + "}"));
                         break;
+                    case RANDOMWITHINLIST:
+                        b.withString(field.getName(), weightedlists.get(field.getName()).getRandom());
+                        break;
                     case RANDOMBOOLEAN:
                         b.withBoolean(field.getName(), fake.bool().bool());
                         break;
                     case RANDOMINT:
-                        b.withInt(field.getName(), (int) fake.number().randomNumber(field.getLength(), true));
+                        b.withInt(field.getName(), (int) fake.number().randomNumber(field.getLength(), false));
                         break;
                     case INCREMENTALINT:
                         b.withInt(field.getName(), (iterator * field.getIncrement()) + field.getMin());
@@ -146,10 +153,10 @@ public class DataGeneratorComponentService {
                         break;
                     // Dates
                     case CURRENTDATETIME:
-                        b.withDateTime(field.getName(), date);
+                        b.withDateTime(field.getName(), zonedDateTime);
                         break;
                     case CURRENTTIMESTAMP:
-                        b.withLong(field.getName(), date.getTime());
+                        b.withLong(field.getName(), zonedDateTime.toEpochSecond());
                         break;
                     case RANDOMDATEBETWEEN:
                         b.withDateTime(field.getName(), fake.date().between(java.sql.Date.valueOf(field.getStartTime()), java.sql.Date.valueOf(field.getEndTime())));
@@ -209,6 +216,11 @@ public class DataGeneratorComponentService {
                     case COLORHEX:
                         b.withString(field.getName(), fake.color().hex());
                         break;
+                    case CURRENCYCODE:
+                        b.withString(field.getName(), fake.currency().code());
+                        break;
+                    case CURRENCYNAME:
+                        b.withString(field.getName(), fake.currency().name());
                     default:  b.withString(field.getName(),"error: field type not found");
                 }
         }
