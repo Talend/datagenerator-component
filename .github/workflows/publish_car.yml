@@ -16,8 +16,7 @@ jobs:
     - name: Build
       id: build
       run: |
-        chmod +x ./mvnw
-        ./mvnw clean install
+        mvn clean install
         mvn talend-component:car -Dtalend.car.output=./target/datagenerator-component.car
         echo "::set-output name=pom_version::$(mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.version -q -DforceStdout)"
 
