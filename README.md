@@ -3,8 +3,8 @@
 </h1>
 <div align="center">
 
-   <a href="https://github.com/tgourdel/datagenerator-component/actions">
-       <img src="https://github.com/tgourdel/datagenerator-component/workflows/TCK%20component%20build/badge.svg"/>
+   <a href="https://github.com/Talend/datagenerator-component/actions">
+       <img src="https://github.com/Talend/datagenerator-component/workflows/TCK%20component%20build/badge.svg"/>
    </a>
    <a href="http://www.apache.org/licenses/LICENSE-2.0.html">
        <img src="http://img.shields.io/:license-apache-brightgreen.svg"/>
@@ -12,14 +12,12 @@
    
 ___
 
-📦 [Download latest CAR archive](https://github.com/tgourdel/datagenerator-component/releases/latest/download/datagenerator-component.car)
+📦 [Download latest CAR archive](https://github.com/Talend/datagenerator-component/releases/latest/download/datagenerator-component.car)
 </div>
 
 ## Description
 
 The Data Generator component has been developed for Talend Pipeline Designer. It is meant to generate random and mock data in a pipeline.
-
-![add_data_generator_dataset](https://user-images.githubusercontent.com/15718239/78310956-c5d29580-754f-11ea-90a1-03e333507697.png)
 
 ## Adding to the Remote Engine for Pipelines
 
@@ -28,7 +26,7 @@ The Data Generator component has been developed for Talend Pipeline Designer. It
 
 mkdir -p /opt/talend/downloads_exchange
 re4p_path=/opt/talend/git/cloud-images-automation/modules/re4p/ # Define your RE4P home path
-wget -P /opt/talend/downloads_exchange/ https://github.com/tgourdel/datagenerator-component/releases/latest/download/datagenerator-component.car
+wget -P /opt/talend/downloads_exchange/ https://github.com/Talend/datagenerator-component/releases/latest/download/datagenerator-component.car
 docker run -v $re4p_path:/opt/talend/pipeline-remote-engine/ -v /opt/talend/downloads_exchange/:/opt/talend/downloads_exchange/ -v /var/run/docker.sock:/var/run/docker.sock tacokit/remote-engine-customizer:latest register-component-archive --remote-engine-dir=/opt/talend/pipeline-remote-engine/ --component-archive=/opt/talend/downloads_exchange/datagenerator-component.car
 ```
 
