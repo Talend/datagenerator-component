@@ -23,7 +23,7 @@ import com.datagenerator.talend.components.service.DataGeneratorComponentService
 // this class role is to enable the work to be distributed in environments supporting it.
 //
 @Version(1) // default version is 1, if some configuration changes happen between 2 versions you can add a migrationHandler
-@Icon(value = Icon.IconType.CUSTOM, custom = "DataGeneratorIcon")
+@Icon(value = Icon.IconType.CUSTOM, custom = "DataGenerator")
 @PartitionMapper(name = "DataGeneratorInput")
 @Documentation("TODO fill the documentation for this mapper")
 public class DataGeneratorInputMapper implements Serializable {
