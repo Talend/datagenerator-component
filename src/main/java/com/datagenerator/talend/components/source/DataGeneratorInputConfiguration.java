@@ -20,7 +20,10 @@ import lombok.ToString;
         @GridLayout.Row({ "dataset" }),
         @GridLayout.Row({ "pseudoStreaming" }),
         @GridLayout.Row({ "subset" }),
-        @GridLayout.Row({ "delay" })
+        @GridLayout.Row({ "delay" }),
+        @GridLayout.Row({ "randomRows" }),
+        @GridLayout.Row({ "minimumRows" }),
+        @GridLayout.Row({ "maximumRows" })
 })
 @Documentation("Data Generator Source Configuration")
 @ToString(callSuper = true)
@@ -54,4 +57,27 @@ public class DataGeneratorInputConfiguration implements Serializable {
     @Max(600000)
     @ActiveIf(target = "pseudoStreaming", value = { "true" })
     private Integer delay = 5000;
+
+    @Option
+    @Required
+    @DefaultValue("false")
+    @Documentation("Random rows quantity")
+    private boolean randomRows;
+
+    @Option
+    @Documentation("Minimum rows number")
+    @DefaultValue("1000")
+    @Min(1)
+    @Max(1000000000)
+    @ActiveIf(target = "randomRows", value = { "true" })
+    private Long minimumRows;
+
+    @Option
+    @Documentation("Minimum rows number")
+    @DefaultValue("10000")
+    @Min(1)
+    @Max(1000000000)
+    @ActiveIf(target = "randomRows", value = { "true" })
+    private Long maximumRows;
+
 }

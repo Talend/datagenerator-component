@@ -131,7 +131,7 @@ public class DataGeneratorComponentService {
                         break;
                     // Random
                     case RANDOMINTBETWEEN:
-                        b.withInt(field.getName(), fake.number().numberBetween(field.getMin(), field.getMax()));
+                        b.withInt(field.getName(), fake.number().numberBetween(field.getMin(), field.getMax()+1));
                         break;
                     case RANDOMSTRING:
                         b.withString(field.getName(), fake.regexify("(\\w){" + field.getMin().toString() + "," + field.getMax().toString() + "}"));

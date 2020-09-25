@@ -8,7 +8,7 @@
 
   <groupId>com.datagenerator</groupId>
   <artifactId>datagenerator-component</artifactId>
-  <version>0.8</version>
+  <version>0.9</version>
   <packaging>jar</packaging>
 
   <name>Data Generator</name>

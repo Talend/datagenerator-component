@@ -14,6 +14,7 @@ import com.datagenerator.talend.components.service.TimeZones;
 import com.datagenerator.talend.components.service.WeightedList;
 import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
+import org.talend.sdk.component.api.component.Icon;
 import org.talend.sdk.component.api.configuration.Option;
 import org.talend.sdk.component.api.input.Producer;
 import org.talend.sdk.component.api.meta.Documentation;
@@ -25,6 +26,7 @@ import com.datagenerator.talend.components.service.DataGeneratorComponentService
 import static com.datagenerator.talend.components.service.Types.RANDOMWITHINLIST;
 
 @Slf4j
+@Icon(value = Icon.IconType.CUSTOM, custom = "DataGenerator")
 @Documentation("TODO fill the documentation for this source")
 public class DataGeneratorInputSource implements Serializable {
 
@@ -50,7 +52,21 @@ public class DataGeneratorInputSource implements Serializable {
     @PostConstruct
     public void init() {
         // initialization
-        rows = configuration.getDataset().getRows();
+
+        if(configuration.isRandomRows()) {
+            log.info("Random rows quantity is enabled.");
+            if (configuration.getMinimumRows() > configuration.getMaximumRows()) {
+                log.error("Maximum number of rows is greater than total rows.");
+                throw new DataGeneratorRuntimeException("With Pseudo Streaming enabled the subset cannot be greater " +
+                        "than the total number of rows. Please check your source configuration.");
+            } else {
+                log.info("===== Random number of rows enabled");
+                rows = configuration.getMinimumRows() + (long) (Math.random() * (configuration.getMaximumRows() - configuration.getMinimumRows()));
+            }
+        } else {
+            rows = configuration.getDataset().getRows();
+        }
+
         log.info("===== configuration =====");
         log.info("===== rows: " + rows);
         if(configuration.getDataset().getCustomSeed() == true) {

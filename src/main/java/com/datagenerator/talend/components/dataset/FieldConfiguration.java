@@ -44,7 +44,7 @@ public class FieldConfiguration implements Serializable {
     @Required
     @Documentation("Length")
     @DefaultValue("6")
-    @ActiveIf(target = "type", value = {"RANDOMINT"} )
+    @ActiveIf(target = "type", value = {"RANDOMINT"})
     private Integer length = 6;
 
     @Option
