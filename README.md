@@ -47,21 +47,88 @@ Once a **Data Generator** connection have been created you can set up a dataset:
 | Rows     |   Number of rows to generate   |
 | Fields   | List of fields (name and type) |
 
+Useful types:
+
+- Random within list: give a list with ponderation to generate columns with weighted values.
+
+
+All types available:
+- Full name
+- First name
+- Last name
+- Middle name
+- Age
+- Email
+- Username
+- Password
+- Sex
+- Marital status
+- Date of birth
+- Phone number
+- Cell phone
+- Nationality
+- Nationality code
+- City
+- State
+- State abbr
+- Postal code
+- Street address
+- Street number
+- Full address
+- Appartment number
+- Card number (visa)
+- Expiry date
+- Vendor
+- Passport number
+- Company domain
+- Company name
+- Company URL
+- UUID,
+- ISBN10,
+- ISBN13,
+- Random integer
+- Random integer between
+- Random string
+- Random boolean
+- Incremental integer
+- Random within list (weighted)
+- Current date time
+- Current timestamp
+- Random date between
+- Beer
+- Beer style
+- Book title
+- Book genre
+- Book author
+- Book publisher
+- App name
+- App version
+- Temperature celcius
+- Temperature farhenheit
+- Weather
+- Animal
+- Aircraft
+- Airport
+- File name
+- File extension
+- Color name
+- Color hex
+- Currency code
+- Currency name
+- Free text
+
 ##### Advanced
 
 | Option   | Description                    |
 |--------  |--------------------------------|
 | Locales  |   Lang & Places (default US)   |
 | Seed     | Set a seed to keep same results|
+| Time Zone | Time zone to generate dates   |
 
 ##### Input in a pipeline
 
 | Option   | Description                    |
 |--------  |--------------------------------|
 | Pseudo Streaming  |   Subset and Delay    |
+| Random Rows Number |   Min & Max rows     |
 
-## 📝 ToDo
-
- - Implement all the functions from the library.
- - Add place / coordinates functions
- - ~~Implement pseudo streaming~~ ✔
