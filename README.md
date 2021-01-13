@@ -61,7 +61,7 @@ All types available:
 - Email
 - Username
 - Password
-- Sex
+- Gender
 - Marital status
 - Date of birth
 - Phone number
