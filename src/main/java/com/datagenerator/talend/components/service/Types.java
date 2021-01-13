@@ -10,7 +10,7 @@ public enum Types{
     EMAIL,
     USERNAME,
     PASSWORD,
-    SEX,
+    GENDER,
     MARITALSTATUS,
     DATEOFBIRTH,
     PHONENUMBER,

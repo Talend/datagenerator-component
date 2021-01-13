@@ -42,7 +42,7 @@ public class DataGeneratorComponentService {
                     case AGE:
                         b.withInt(field.getName(), fake.number().numberBetween(field.getMin(), field.getMax()));
                         break;
-                    case SEX:
+                    case GENDER:
                         b.withString(field.getName(), fake.demographic().sex());
                         break;
                     case MARITALSTATUS:
