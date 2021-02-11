@@ -1,3 +1,13 @@
+/*
+ * Copyright (C) 2006-2021 Talend Inc. - www.talend.com
+ *
+ * This source code is available under agreement available at
+ * %InstallDIR%\features\org.talend.rcp.branding.%PRODUCTNAME%\%PRODUCTNAME%license.txt
+ *
+ * You should have received a copy of the agreement
+ * along with this program; if not, write to Talend SA
+ * 9 rue Pages 92150 Suresnes, France
+ */
 package com.datagenerator.talend.components.dataset;
 
 import java.io.Serializable;
@@ -27,25 +37,17 @@ import static org.talend.sdk.component.api.configuration.ui.layout.GridLayout.Fo
 
 @Data
 @DataSet("DataGeneratorDataset")
-@Documentation("DataGenerator Dataset")
+@Documentation("Data Generator Dataset.")
 @ToString
-@GridLayout({
-        @GridLayout.Row({ "datastore" }),
-        @GridLayout.Row({ "rows" }),
-        @GridLayout.Row({"customLocale"}),
-        @GridLayout.Row({"locales"}),
-        @GridLayout.Row({ "fields" })
-})
-@GridLayout(names = ADVANCED, value = {
-        @GridLayout.Row({"customSeed"}),
-        @GridLayout.Row({"seed"}),
-        @GridLayout.Row({"zone"})
-})
+@GridLayout({ @GridLayout.Row({ "datastore" }), @GridLayout.Row({ "rows" }), @GridLayout.Row({ "customLocale" }),
+        @GridLayout.Row({ "locales" }), @GridLayout.Row({ "fields" }) })
+@GridLayout(names = ADVANCED, value = { @GridLayout.Row({ "customSeed" }), @GridLayout.Row({ "seed" }),
+        @GridLayout.Row({ "zone" }) })
 
 public class DataGeneratorDataset implements Serializable {
 
     @Option
-    @Documentation("Connection")
+    @Documentation("Connection.")
     private DataGeneratorDatastore datastore;
 
     @Option
@@ -53,22 +55,22 @@ public class DataGeneratorDataset implements Serializable {
     @DefaultValue("10000")
     @Min(1)
     @Max(1000000000)
-    @Documentation("Rows")
+    @Documentation("Rows.")
     private Long rows;
 
     @Option
     @Required
-    @Documentation("Fields")
+    @Documentation("Fields.")
     private List<FieldConfiguration> fields;
 
     @Option
     @Required
     @DefaultValue("false")
-    @Documentation("Custom Locale")
+    @Documentation("Custom Locale.")
     private Boolean customLocale;
 
     @Option
-    @Documentation("Locales")
+    @Documentation("Select a locale to generate data in the associated language.")
     @ActiveIf(target = "customLocale", value = { "true" })
     @Suggestable(value = LOCALE_CHOICES, parameters = { "../datastore" })
     private List<String> locales;
@@ -76,18 +78,18 @@ public class DataGeneratorDataset implements Serializable {
     @Option
     @Required
     @DefaultValue("false")
-    @Documentation("Custom Seed")
+    @Documentation("Custom Seed.")
     private Boolean customSeed;
 
     @Option
     @DefaultValue("123456")
-    @Documentation("Seed")
+    @Documentation("Seed.")
     @ActiveIf(target = "customSeed", value = { "true" })
     private Long seed;
 
     @Option
     @DefaultValue("GMTP00")
-    @Documentation("Time zone")
+    @Documentation("Time zone.")
     private TimeZones zone = TimeZones.GMTP00;
 
 }

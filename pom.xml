@@ -1,38 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="
-          http://maven.apache.org/POM/4.0.0
-          http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.talend</groupId>
-  <artifactId>datagenerator-component</artifactId>
-  <version>1.0</version>
-  <packaging>jar</packaging>
+    <groupId>org.talend.components</groupId>
+    <version>1.O</version>
 
-  <name>Data Generator</name>
+  <artifactId>data-generator</artifactId>
+
+  <name>Components :: Data Generator</name>
   <description>Data Generator component for Talend Cloud apps</description>
 
   <properties>
+    <testcontainers.version>1.12.3</testcontainers.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
     <!--
     Set it to true if you want the documentation to be rendered as HTML and PDF
-
     You can also use it on the command line: -Dtalend.documentation.htmlAndPdf=true
     -->
     <talend.documentation.htmlAndPdf>false</talend.documentation.htmlAndPdf>
-
     <!--
     if you want to deploy into the studio you can use the related goal:
-
     mvn package talend-component:deploy-in-studio -Dtalend.component.studioHome=/path/to/studio
-
     TIP: it is recommended to set this property into your settings.xml in an active by default profile.
     -->
     <talend.component.studioHome />
-    <component.version>1.1.20</component.version>
+    <component-runtime.version>1.29.1</component-runtime.version>
+
     <slf4j.version>1.7.25</slf4j.version>
   </properties>
 
@@ -40,7 +33,7 @@
     <dependency>
       <groupId>org.talend.sdk.component</groupId>
       <artifactId>component-api</artifactId>
-      <version>${component.version}</version>
+      <version>${component-runtime.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -62,17 +55,22 @@
       <version>1.0.2</version>
     </dependency>
 
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.talend.sdk.component</groupId>
+      <artifactId>component-runtime-junit</artifactId>
+      <version>${component-runtime.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
-    <extensions>
-      <extension>
-        <groupId>org.talend.sdk.component</groupId>
-        <artifactId>talend-component-maven-plugin</artifactId>
-        <version>1.1.10</version>
-      </extension>
-    </extensions>
-
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -101,7 +99,7 @@
       <plugin>
         <groupId>org.talend.sdk.component</groupId>
         <artifactId>talend-component-maven-plugin</artifactId>
-        <version>${component.version}</version>
+        <version>${component-runtime.version}</version>
         <executions>
           <execution>
             <id>talend-svg2png</id>
@@ -112,5 +110,12 @@
         </executions>
       </plugin>
     </plugins>
+    <extensions>
+      <extension>
+        <groupId>org.talend.sdk.component</groupId>
+        <artifactId>talend-component-maven-plugin</artifactId>
+        <version>1.1.10</version>
+      </extension>
+    </extensions>
   </build>
 </project>

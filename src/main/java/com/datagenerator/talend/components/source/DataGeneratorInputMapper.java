@@ -1,3 +1,13 @@
+/*
+ * Copyright (C) 2006-2021 Talend Inc. - www.talend.com
+ *
+ * This source code is available under agreement available at
+ * %InstallDIR%\features\org.talend.rcp.branding.%PRODUCTNAME%\%PRODUCTNAME%license.txt
+ *
+ * You should have received a copy of the agreement
+ * along with this program; if not, write to Talend SA
+ * 9 rue Pages 92150 Suresnes, France
+ */
 package com.datagenerator.talend.components.source;
 
 import static java.util.Collections.singletonList;
@@ -17,23 +27,25 @@ import org.talend.sdk.component.api.input.Split;
 import org.talend.sdk.component.api.meta.Documentation;
 import org.talend.sdk.component.api.service.record.RecordBuilderFactory;
 
-import com.datagenerator.talend.components.service.DataGeneratorComponentService;
+import com.datagenerator.talend.components.service.GeneratorService;
 
 //
 // this class role is to enable the work to be distributed in environments supporting it.
 //
 @Version(1) // default version is 1, if some configuration changes happen between 2 versions you can add a migrationHandler
-@Icon(value = Icon.IconType.CUSTOM, custom = "DataGenerator")
+@Icon(value = CUSTOM, custom = "generator")
 @PartitionMapper(name = "DataGeneratorInput")
-@Documentation("TODO fill the documentation for this mapper")
+@Documentation("Data Generator mapper.")
 public class DataGeneratorInputMapper implements Serializable {
+
     private final DataGeneratorInputConfiguration configuration;
-    private final DataGeneratorComponentService service;
+
+    private final GeneratorService service;
+
     private final RecordBuilderFactory recordBuilderFactory;
 
     public DataGeneratorInputMapper(@Option("configuration") final DataGeneratorInputConfiguration configuration,
-                        final DataGeneratorComponentService service,
-                        final RecordBuilderFactory recordBuilderFactory) {
+            final GeneratorService service, final RecordBuilderFactory recordBuilderFactory) {
         this.configuration = configuration;
         this.service = service;
         this.recordBuilderFactory = recordBuilderFactory;

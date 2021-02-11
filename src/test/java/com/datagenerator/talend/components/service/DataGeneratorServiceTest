@@ -1,0 +1,63 @@
+package com.datagenerator.talend.components.service;
+
+import com.sun.net.httpserver.HttpServer;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.talend.sdk.component.api.record.Record;
+import org.talend.sdk.component.api.service.Service;
+import org.talend.sdk.component.api.service.record.RecordBuilderFactory;
+import org.talend.sdk.component.junit.BaseComponentsHandler;
+import org.talend.sdk.component.junit5.Injected;
+import org.talend.sdk.component.junit5.WithComponents;
+import org.talend.sdk.component.junit5.environment.EnvironmentalTest;
+import org.talend.sdk.component.runtime.manager.chain.Job;
+import org.talend.sdk.component.runtime.manager.service.RecordPointerFactoryImpl;
+
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.talend.sdk.component.junit.SimpleFactory.configurationByExample;
+
+@Slf4j
+@WithComponents(value = "org.talend.components.datagenerator")
+public class DataGeneratorServiceTest {
+
+    private final static int NB_RECORDS = 10;
+
+    @Service
+    GeneratorService service;
+
+    @Service
+    protected RecordBuilderFactory recordBuilderFactory;
+
+    @Injected
+    private BaseComponentsHandler handler;
+
+    @BeforeEach
+    void buildConfig() throws IOException {
+
+    }
+
+
+
+}

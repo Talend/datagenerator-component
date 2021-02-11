@@ -1,3 +1,13 @@
+/*
+ * Copyright (C) 2006-2021 Talend Inc. - www.talend.com
+ *
+ * This source code is available under agreement available at
+ * %InstallDIR%\features\org.talend.rcp.branding.%PRODUCTNAME%\%PRODUCTNAME%license.txt
+ *
+ * You should have received a copy of the agreement
+ * along with this program; if not, write to Talend SA
+ * 9 rue Pages 92150 Suresnes, France
+ */
 package com.datagenerator.talend.components.source;
 
 import java.io.Serializable;
@@ -16,15 +26,9 @@ import lombok.Data;
 import lombok.ToString;
 
 @Data
-@GridLayout({
-        @GridLayout.Row({ "dataset" }),
-        @GridLayout.Row({ "pseudoStreaming" }),
-        @GridLayout.Row({ "subset" }),
-        @GridLayout.Row({ "delay" }),
-        @GridLayout.Row({ "randomRows" }),
-        @GridLayout.Row({ "minimumRows" }),
-        @GridLayout.Row({ "maximumRows" })
-})
+@GridLayout({ @GridLayout.Row({ "dataset" }), @GridLayout.Row({ "pseudoStreaming" }), @GridLayout.Row({ "subset" }),
+        @GridLayout.Row({ "delay" }), @GridLayout.Row({ "randomRows" }), @GridLayout.Row({ "minimumRows" }),
+        @GridLayout.Row({ "maximumRows" }) })
 @Documentation("Data Generator Source Configuration")
 @ToString(callSuper = true)
 public class DataGeneratorInputConfiguration implements Serializable {
@@ -33,17 +37,17 @@ public class DataGeneratorInputConfiguration implements Serializable {
      * DataSet
      */
     @Option
-    @Documentation("Data Generator dataSet")
+    @Documentation("Data Generator dataset.")
     private DataGeneratorDataset dataset;
 
     @Option
     @Required
     @DefaultValue("false")
-    @Documentation("Pseudo Streaming")
+    @Documentation("Pseudo Streaming.")
     private boolean pseudoStreaming;
 
     @Option
-    @Documentation("Subset size")
+    @Documentation("Subset size.")
     @DefaultValue("100")
     @Min(1)
     @Max(1000000000)
@@ -51,7 +55,7 @@ public class DataGeneratorInputConfiguration implements Serializable {
     private Integer subset = 100;
 
     @Option
-    @Documentation("Delay (ms)")
+    @Documentation("Delay (ms).")
     @DefaultValue("5000")
     @Min(1000)
     @Max(600000)
@@ -61,11 +65,11 @@ public class DataGeneratorInputConfiguration implements Serializable {
     @Option
     @Required
     @DefaultValue("false")
-    @Documentation("Random rows quantity")
+    @Documentation("Random rows quantity.")
     private boolean randomRows;
 
     @Option
-    @Documentation("Minimum rows number")
+    @Documentation("Minimum rows number.")
     @DefaultValue("1000")
     @Min(1)
     @Max(1000000000)
@@ -73,7 +77,7 @@ public class DataGeneratorInputConfiguration implements Serializable {
     private Long minimumRows;
 
     @Option
-    @Documentation("Minimum rows number")
+    @Documentation("Minimum rows number.")
     @DefaultValue("10000")
     @Min(1)
     @Max(1000000000)
