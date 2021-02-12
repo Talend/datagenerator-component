@@ -74,8 +74,7 @@ public class GeneratorService {
                 addFieldWithString(b, blank, field.getName(), fake.internet().password(field.getMin(), field.getMax()));
                 break;
             case DATEOFBIRTH:
-                // DateTime
-                addFieldWithDate(b, blank, field.getName(), fake.date().birthday());
+                addFieldWithString(b, blank, field.getName(), fake.date().birthday().toString());
                 break;
             case PHONENUMBER:
                 addFieldWithString(b, blank, field.getName(), fake.phoneNumber().phoneNumber());
@@ -148,7 +147,7 @@ public class GeneratorService {
                 break;
             // Random
             case RANDOMINTBETWEEN:
-                addFieldWithInt(b, blank, field.getName(), fake.number().numberBetween(field.getMin(), field.getMax() + 1));
+                addFieldWithString(b, blank, field.getName(), String.valueOf(fake.number().numberBetween(field.getMin(), field.getMax() + 1)));
                 break;
             case RANDOMSTRING:
                 addFieldWithString (b, blank, field.getName(),
@@ -158,27 +157,27 @@ public class GeneratorService {
                 addFieldWithString(b, blank, field.getName(), weightedlists.get(field.getName()).getRandom());
                 break;
             case RANDOMBOOLEAN:
-                addFieldWithBoolean(b, blank, field.getName(), fake.bool().bool());
+                addFieldWithString(b, blank, field.getName(), String.valueOf(fake.bool().bool()));
                 break;
             case RANDOMINT:
-                addFieldWithInt(b, blank, field.getName(), (int) fake.number().randomNumber(field.getLength(), false));
+                addFieldWithString(b, blank, field.getName(), String.valueOf(fake.number().randomNumber(field.getLength(), false)));
                 break;
             case INCREMENTALINT:
-                addFieldWithInt(b, blank, field.getName(), (iterator * field.getIncrement()) + field.getMin());
+                addFieldWithString(b, blank, field.getName(), ((iterator * field.getIncrement()) + field.getMin().toString()));
                 break;
             case CUSTOM:
                 addFieldWithString(b, blank, field.getName(), fake.regexify(field.getRegex()));
                 break;
             // Dates
             case CURRENTDATETIME:
-                addFieldWithDateTime(b, blank, field.getName(), zonedDateTime);
+                addFieldWithString(b, blank, field.getName(), String.valueOf(zonedDateTime));
                 break;
             case CURRENTTIMESTAMP:
-                addFieldWithLong(b, blank, field.getName(), zonedDateTime.toEpochSecond());
+                addFieldWithString(b, blank, field.getName(), String.valueOf(zonedDateTime.toEpochSecond()));
                 break;
             case RANDOMDATEBETWEEN:
-                addFieldWithDate(b, blank, field.getName(), fake.date().between(java.sql.Date.valueOf(field.getStartTime()),
-                        java.sql.Date.valueOf(field.getEndTime())));
+                addFieldWithString(b, blank, field.getName(), fake.date().between(java.sql.Date.valueOf(field.getStartTime()),
+                        java.sql.Date.valueOf(field.getEndTime())).toString());
                 break;
             // Funny
             case BEER:
@@ -248,47 +247,11 @@ public class GeneratorService {
         return b;
     }
 
-
     private void addFieldWithString(Record.Builder b, boolean blank, String name, String value) {
         if(blank)
             value = null;
 
         b.withString(name, value);
-    }
-
-    private void addFieldWithInt(Record.Builder b, boolean blank, String name, Integer value) {
-        if(blank)
-            value = null;
-
-        b.withInt(name, value);
-    }
-
-    private void addFieldWithLong(Record.Builder b, boolean blank, String name, Long value) {
-        if(blank)
-            value = null;
-
-        b.withLong(name, value);
-    }
-
-    private void addFieldWithDate(Record.Builder b, boolean blank, String name, Date value) {
-        if(blank)
-            value = null;
-
-        b.withDateTime(name, value);
-    }
-
-    private void addFieldWithDateTime(Record.Builder b, boolean blank, String name, ZonedDateTime value) {
-        if(blank)
-            value = null;
-
-        b.withDateTime(name, value);
-    }
-
-    private void addFieldWithBoolean(Record.Builder b, boolean blank, String name, Boolean value) {
-        if(blank)
-            value = null;
-
-        b.withBoolean(name, value);
     }
 
 }
