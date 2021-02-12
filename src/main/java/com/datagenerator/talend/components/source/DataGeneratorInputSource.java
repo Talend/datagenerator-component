@@ -87,13 +87,13 @@ public class DataGeneratorInputSource implements Serializable {
             rows = configuration.getDataset().getRows();
         }
 
-        log.info("===== configuration =====");
-        log.info("===== rows: " + rows);
+        log.info("===== Configuration =====");
+        log.info("===== Rows: " + rows);
         if (configuration.getDataset().getCustomSeed() == true) {
             seed = configuration.getDataset().getSeed();
-            log.info("===== seed: " + rows);
+            log.info("===== Seed: " + rows);
         } else {
-            log.info("===== no seed specified");
+            log.info("===== No seed specified");
         }
         iteration = 0;
         fakers = new ArrayList<Faker>();
@@ -103,7 +103,7 @@ public class DataGeneratorInputSource implements Serializable {
             zone = ZoneId.of(configuration.getDataset().getZone().getName());
         }
 
-        log.info("===== fakers: " + fakers.toString());
+        log.info("===== Fakers: " + fakers.toString());
 
         // safeguards
         if (configuration.isPseudoStreaming()) {

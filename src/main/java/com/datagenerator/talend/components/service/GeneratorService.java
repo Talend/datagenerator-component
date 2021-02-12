@@ -43,10 +43,10 @@ public class GeneratorService {
             switch (field.getType()) {
             // Personal
             case FULLNAME:
-                b.withString(field.getName(), fake.name().fullName());
+                addFieldWithString (b, blank, field.getName(), fake.name().fullName());
                 break;
             case FIRSTNAME:
-                b.withString(field.getName(), fake.name().firstName());
+                addFieldWithString (b, blank, field.getName(), fake.name().firstName());
                 break;
             case LASTNAME:
                 b.withString(field.getName(), fake.name().lastName());
@@ -245,5 +245,17 @@ public class GeneratorService {
 
         return b;
     }
+
+
+    private void addFieldWithString (Record.Builder b, boolean blank, String name, String value) {
+        if(blank)
+            b.withString(name, null);
+        else
+            b.withString(name, value);
+    }
+
+
+
+
 
 }

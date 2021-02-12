@@ -48,10 +48,8 @@ public class FieldConfiguration implements Serializable {
     private Types type;
 
     @Option
-    @Required
     @Min(0)
     @Max(100)
-    @DefaultValue("0")
     @Documentation("Blank percentage.")
     private Integer blank = 0;
 

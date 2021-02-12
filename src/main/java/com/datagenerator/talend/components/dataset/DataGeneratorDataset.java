@@ -39,9 +39,10 @@ import static org.talend.sdk.component.api.configuration.ui.layout.GridLayout.Fo
 @DataSet("DataGeneratorDataset")
 @Documentation("Data Generator Dataset.")
 @ToString
-@GridLayout({ @GridLayout.Row({ "datastore" }), @GridLayout.Row({ "rows" }), @GridLayout.Row({ "customLocale" }),
-        @GridLayout.Row({ "locales" }), @GridLayout.Row({ "fields" }) })
-@GridLayout(names = ADVANCED, value = { @GridLayout.Row({ "customSeed" }), @GridLayout.Row({ "seed" }),
+@GridLayout({ @GridLayout.Row({ "datastore" }), @GridLayout.Row({ "rows" }),
+        @GridLayout.Row({ "fields" }) })
+@GridLayout(names = ADVANCED, value = { @GridLayout.Row({ "customSeed" }), @GridLayout.Row({ "customLocale" }),
+        @GridLayout.Row({ "locales" }), @GridLayout.Row({ "seed" }),
         @GridLayout.Row({ "zone" }) })
 
 public class DataGeneratorDataset implements Serializable {
