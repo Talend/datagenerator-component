@@ -56,7 +56,7 @@ public class GeneratorService {
                 break;
             case AGE:
                 // Int
-                addFieldWithInt(b, blank, field.getName(), fake.number().numberBetween(field.getMin(), field.getMax()));
+                addFieldWithString(b, blank, field.getName(), String.valueOf(fake.number().numberBetween(field.getMin(), field.getMax())));
                 break;
             case GENDER:
                 addFieldWithString(b, blank, field.getName(), fake.demographic().sex());
