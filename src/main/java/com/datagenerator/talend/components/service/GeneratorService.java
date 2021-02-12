@@ -12,6 +12,7 @@ package com.datagenerator.talend.components.service;
 
 import com.datagenerator.talend.components.dataset.FieldConfiguration;
 import com.github.javafaker.Faker;
+import org.talend.sdk.component.api.configuration.ui.widget.DateTime;
 import org.talend.sdk.component.api.record.Record;
 import org.talend.sdk.component.api.service.Service;
 
@@ -33,6 +34,12 @@ public class GeneratorService {
 
         // For each field select we add a value to the record
         for (FieldConfiguration field : fields) {
+
+            boolean blank = false;
+            if(field.getBlank() > 0)
+                if(fake.random().nextInt(0, 100) <= field.getBlank())
+                    blank = true;
+
             switch (field.getType()) {
             // Personal
             case FULLNAME:
@@ -235,6 +242,8 @@ public class GeneratorService {
                 b.withString(field.getName(), "error: field type not found");
             }
         }
+
         return b;
     }
+
 }

@@ -29,7 +29,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-@GridLayout({ @GridLayout.Row({ "name" }), @GridLayout.Row({ "type", "blank" }), @GridLayout.Row({ "regex" }),
+@GridLayout({ @GridLayout.Row({ "name" }), @GridLayout.Row({ "type"}), @GridLayout.Row({ "blank" }), @GridLayout.Row({ "regex" }),
         @GridLayout.Row({ "length" }), @GridLayout.Row({ "min" }), @GridLayout.Row({ "max" }), @GridLayout.Row({ "startTime" }),
         @GridLayout.Row({ "endTime" }), @GridLayout.Row({ "increment" }), @GridLayout.Row({ "freetext" }),
         @GridLayout.Row({ "randomwithinlist" }) })
@@ -43,7 +43,7 @@ public class FieldConfiguration implements Serializable {
 
     @Option
     @Required
-    @DefaultValue("RANDOMSTRING")
+    @DefaultValue("FULLNAME")
     @Documentation("Types.")
     private Types type;
 
@@ -52,7 +52,7 @@ public class FieldConfiguration implements Serializable {
     @Min(0)
     @Max(100)
     @DefaultValue("0")
-    @Documentation("Types.")
+    @Documentation("Blank percentage.")
     private Integer blank = 0;
 
     @Option

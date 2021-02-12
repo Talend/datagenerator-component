@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.talend.components</groupId>
-    <version>1.O</version>
+    <version>1.0</version>
 
   <artifactId>data-generator</artifactId>
 
