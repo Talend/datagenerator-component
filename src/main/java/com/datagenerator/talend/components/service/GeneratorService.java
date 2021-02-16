@@ -35,10 +35,13 @@ public class GeneratorService {
         // For each field select we add a value to the record
         for (FieldConfiguration field : fields) {
 
+            boolean canBeBlank = false;
             boolean blank = false;
-            if(field.getBlank() > 0)
-                if(fake.random().nextInt(0, 100) <= field.getBlank())
+            if(field.getBlank() > 0) {
+                canBeBlank = true;
+                if (fake.random().nextInt(0, 100) <= field.getBlank())
                     blank = true;
+            }
 
             switch (field.getType()) {
             // Personal
@@ -55,8 +58,11 @@ public class GeneratorService {
                 addFieldWithString(b, blank, field.getName(), fake.name().nameWithMiddle());
                 break;
             case AGE:
-                // Int
-                addFieldWithString(b, blank, field.getName(), String.valueOf(fake.number().numberBetween(field.getMin(), field.getMax())));
+                if(canBeBlank)
+                    addFieldWithString(b, blank, field.getName(),
+                            String.valueOf(fake.number().numberBetween(field.getMin(), field.getMax())));
+                else
+                    b.withInt(field.getName(), fake.number().numberBetween(field.getMin(), field.getMax()));
                 break;
             case GENDER:
                 addFieldWithString(b, blank, field.getName(), fake.demographic().sex());
@@ -74,7 +80,10 @@ public class GeneratorService {
                 addFieldWithString(b, blank, field.getName(), fake.internet().password(field.getMin(), field.getMax()));
                 break;
             case DATEOFBIRTH:
-                addFieldWithString(b, blank, field.getName(), fake.date().birthday().toString());
+                if(canBeBlank)
+                    addFieldWithString(b, blank, field.getName(), String.valueOf(fake.date().birthday()));
+                else
+                    b.withDateTime(field.getName(), fake.date().birthday());
                 break;
             case PHONENUMBER:
                 addFieldWithString(b, blank, field.getName(), fake.phoneNumber().phoneNumber());
@@ -147,7 +156,10 @@ public class GeneratorService {
                 break;
             // Random
             case RANDOMINTBETWEEN:
-                addFieldWithString(b, blank, field.getName(), String.valueOf(fake.number().numberBetween(field.getMin(), field.getMax() + 1)));
+                if(canBeBlank)
+                    addFieldWithString(b, blank, field.getName(), String.valueOf(fake.number().numberBetween(field.getMin(), field.getMax() + 1)));
+                else
+                    b.withInt(field.getName(), fake.number().numberBetween(field.getMin(), field.getMax() + 1));
                 break;
             case RANDOMSTRING:
                 addFieldWithString (b, blank, field.getName(),
@@ -157,27 +169,46 @@ public class GeneratorService {
                 addFieldWithString(b, blank, field.getName(), weightedlists.get(field.getName()).getRandom());
                 break;
             case RANDOMBOOLEAN:
-                addFieldWithString(b, blank, field.getName(), String.valueOf(fake.bool().bool()));
+                if(canBeBlank)
+                    addFieldWithString(b, blank, field.getName(), String.valueOf(fake.bool().bool()));
+                else
+                    b.withBoolean(field.getName(), fake.bool().bool());
                 break;
             case RANDOMINT:
-                addFieldWithString(b, blank, field.getName(), String.valueOf(fake.number().randomNumber(field.getLength(), false)));
+                if(canBeBlank)
+                    addFieldWithString(b, blank, field.getName(), String.valueOf((int) fake.number().randomNumber(field.getLength(), false)));
+                else
+                    b.withInt(field.getName(), (int) fake.number().randomNumber(field.getLength(), false));
                 break;
             case INCREMENTALINT:
-                addFieldWithString(b, blank, field.getName(), ((iterator * field.getIncrement()) + field.getMin().toString()));
+                if(canBeBlank)
+                    addFieldWithString(b, blank, field.getName(), String.valueOf((iterator * field.getIncrement() + field.getMin())));
+                else
+                    b.withInt(field.getName(), (iterator * field.getIncrement()) + field.getMin());
                 break;
             case CUSTOM:
                 addFieldWithString(b, blank, field.getName(), fake.regexify(field.getRegex()));
                 break;
             // Dates
             case CURRENTDATETIME:
-                addFieldWithString(b, blank, field.getName(), String.valueOf(zonedDateTime));
+                if(canBeBlank)
+                    addFieldWithString(b, blank, field.getName(), String.valueOf(zonedDateTime));
+                else
+                    b.withDateTime(field.getName(), zonedDateTime);
                 break;
             case CURRENTTIMESTAMP:
-                addFieldWithString(b, blank, field.getName(), String.valueOf(zonedDateTime.toEpochSecond()));
+                if(canBeBlank)
+                    addFieldWithString(b, blank, field.getName(), String.valueOf(zonedDateTime.toEpochSecond()));
+                else
+                    b.withLong(field.getName(), zonedDateTime.toEpochSecond());
                 break;
             case RANDOMDATEBETWEEN:
-                addFieldWithString(b, blank, field.getName(), fake.date().between(java.sql.Date.valueOf(field.getStartTime()),
-                        java.sql.Date.valueOf(field.getEndTime())).toString());
+                if(canBeBlank)
+                    addFieldWithString(b, blank, field.getName(), String.valueOf(fake.date().between(java.sql.Date.valueOf(field.getStartTime()),
+                            java.sql.Date.valueOf(field.getEndTime()))));
+                else
+                    b.withDateTime(field.getName(), fake.date().between(java.sql.Date.valueOf(field.getStartTime()),
+                            java.sql.Date.valueOf(field.getEndTime())));
                 break;
             // Funny
             case BEER:
