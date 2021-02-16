@@ -29,8 +29,9 @@ public class GeneratorService {
     public Record.Builder addFieldsToRecord(Integer iterator, Faker fake, HashMap<String, WeightedList<String>> weightedlists,
             List<FieldConfiguration> fields, ZoneId id, Record.Builder b) {
 
-        LocalDateTime now = LocalDateTime.now();
-        ZonedDateTime zonedDateTime = ZonedDateTime.of(now, id);
+        ZonedDateTime now = ZonedDateTime.now();
+        // LocalDateTime now = LocalDateTime.now();
+        ZonedDateTime zonedDateTime = now.withZoneSameInstant(id);
 
         // For each field select we add a value to the record
         for (FieldConfiguration field : fields) {
@@ -210,7 +211,7 @@ public class GeneratorService {
                     b.withDateTime(field.getName(), fake.date().between(java.sql.Date.valueOf(field.getStartTime()),
                             java.sql.Date.valueOf(field.getEndTime())));
                 break;
-            // Funny
+            // Theme
             case BEER:
                 addFieldWithString(b, blank, field.getName(), fake.beer().name());
                 break;
