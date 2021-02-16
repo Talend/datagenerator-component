@@ -13,21 +13,21 @@ package com.datagenerator.talend.components.service;
 public enum TimeZones {
 
     DEFAULT("Default"),
-    GMTM12("Etc/GMT-12"),
-    GMTM11("Pacific/Pago_Pago"),
+    GMTM12("Etc/GMT+12"),
+    GMTM11("Pacific/Samoa"),
     GMTM10("Pacific/Honolulu"),
-    GMTM09("Pacific/Gambier"),
+    GMTM09("America/Anchorage"),
     GMTM08("America/Los_Angeles"),
-    GMTM07("America/Vancouver"),
-    GMTM06("America/Denver"),
-    GMTM05("America/Chicago"),
-    GMTM04("America/Havana"),
-    GMTM03("America/Cayenne"),
-    GMTM02("America/Miquelon"),
-    GMTM01("Atlantic/Cape_Verde"),
+    GMTM07("America/Denver"),
+    GMTM06("America/Regina"),
+    GMTM05("America/New_York"),
+    GMTM04("America/Santiago"),
+    GMTM03("America/Sao_Paulo"),
+    GMTM02("Etc/GMT+2"),
+    GMTM01("Atlantic/Azores"),
     GMTP00("Etc/UTC"),
     GMTP01("Europe/Paris"),
-    GMTP02("Europe/Kaliningrad"),
+    GMTP02("Europe/Kiev"),
     GMTP03("Europe/Moscow"),
     GMTP04("Asia/Dubai"),
     GMTP45("Asia/Kabul"),
@@ -37,10 +37,10 @@ public enum TimeZones {
     GMTP07("Asia/Bangkok"),
     GMTP08("Asia/Singapore"),
     GMTP09("Asia/Seoul"),
-    GMTP95("Australia/Yancowinna"),
-    GMTP10("Australia/Melbourne"),
-    GMTP11("Pacific/Norfolk"),
-    GMTP12("Pacific/Fiji");
+    GMTP95("Australia/Darwin"),
+    GMTP10("Australia/Sydney"),
+    GMTP11("Pacific/Guadalcanal"),
+    GMTP12("Pacific/Auckland");
 
     private final String name;
 
