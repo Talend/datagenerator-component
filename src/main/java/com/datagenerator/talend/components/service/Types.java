@@ -47,6 +47,7 @@ public enum Types {
     ISBN13,
     // Random
     RANDOMINT,
+    RANDOMLONG,
     RANDOMINTBETWEEN,
     RANDOMSTRING,
     RANDOMBOOLEAN,

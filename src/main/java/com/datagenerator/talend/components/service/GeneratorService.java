@@ -175,12 +175,22 @@ public class GeneratorService {
                 else
                     b.withBoolean(field.getName(), fake.bool().bool());
                 break;
-            case RANDOMINT:
-                if(canBeBlank)
-                    addFieldWithString(b, blank, field.getName(), String.valueOf((int) fake.number().randomNumber(field.getLength(), false)));
-                else
-                    b.withInt(field.getName(), (int) fake.number().randomNumber(field.getLength(), false));
-                break;
+                case RANDOMINT:
+                    if (canBeBlank) {
+                        addFieldWithString(b, blank, field.getName(),
+                                String.valueOf(fake.number().randomNumber(field.getLength(), false)));
+                    }
+                    else
+                        b.withInt(field.getName(), (int) fake.number().randomNumber(field.getLength(), false));
+                    break;
+                case RANDOMLONG:
+                    if (canBeBlank) {
+                        addFieldWithString(b, blank, field.getName(),
+                                String.valueOf(fake.number().randomNumber(field.getLength(), false)));
+                    }
+                    else
+                        b.withLong(field.getName(), (Long) fake.number().randomNumber(field.getLength(), false));
+                    break;
             case INCREMENTALINT:
                 if(canBeBlank)
                     addFieldWithString(b, blank, field.getName(), String.valueOf((iterator * field.getIncrement() + field.getMin())));
