@@ -29,10 +29,10 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-@GridLayout({ @GridLayout.Row({ "name" }), @GridLayout.Row({ "type"}), @GridLayout.Row({ "blank" }), @GridLayout.Row({ "regex" }),
+@GridLayout({ @GridLayout.Row({ "name" }), @GridLayout.Row({ "type"}), @GridLayout.Row({ "regex" }),
         @GridLayout.Row({ "length" }), @GridLayout.Row({ "min" }), @GridLayout.Row({ "max" }), @GridLayout.Row({ "startTime" }),
         @GridLayout.Row({ "endTime" }), @GridLayout.Row({ "increment" }), @GridLayout.Row({ "freetext" }),
-        @GridLayout.Row({ "randomwithinlist" }) })
+        @GridLayout.Row({ "randomwithinlist" }), @GridLayout.Row({ "blank" }) })
 @Documentation("Field configuration.")
 public class FieldConfiguration implements Serializable {
 
@@ -51,6 +51,7 @@ public class FieldConfiguration implements Serializable {
     @Min(0)
     @Max(100)
     @Documentation("Blank percentage.")
+    @ActiveIf(target = "enableBlank", value = "true")
     private Integer blank = 0;
 
     @Option
