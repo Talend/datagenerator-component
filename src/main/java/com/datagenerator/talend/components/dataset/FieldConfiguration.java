@@ -51,7 +51,6 @@ public class FieldConfiguration implements Serializable {
     @Min(0)
     @Max(100)
     @Documentation("Blank percentage.")
-    @ActiveIf(target = "enableBlank", value = "true")
     private Integer blank = 0;
 
     @Option

@@ -41,7 +41,7 @@ import static org.talend.sdk.component.api.configuration.ui.layout.GridLayout.Fo
 @ToString
 @GridLayout({ @GridLayout.Row({ "datastore" }), @GridLayout.Row({ "rows" }),
         @GridLayout.Row({ "fields" }) })
-@GridLayout(names = ADVANCED, value = { @GridLayout.Row({ "enableBlank" }), @GridLayout.Row({ "customSeed" }), @GridLayout.Row({ "seed" }),
+@GridLayout(names = ADVANCED, value = { @GridLayout.Row({ "customSeed" }), @GridLayout.Row({ "seed" }),
         @GridLayout.Row({ "customLocale" }),
         @GridLayout.Row({ "locales" }),
         @GridLayout.Row({ "zone" }) })
@@ -64,12 +64,6 @@ public class DataGeneratorDataset implements Serializable {
     @Required
     @Documentation("Fields.")
     private List<FieldConfiguration> fields;
-
-    @Option
-    @Required
-    @DefaultValue("false")
-    @Documentation("Enable blank %.")
-    private Boolean enableBlank;
 
     @Option
     @Required
